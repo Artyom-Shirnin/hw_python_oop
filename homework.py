@@ -1,5 +1,6 @@
 from dataclasses import dataclass, asdict
 
+
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
@@ -73,7 +74,8 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий во время бега."""
-        return ((self.COEFF_CALORIE_1 * self.get_mean_speed() - self.COEFF_CALORIE_2)
+        return ((self.COEFF_CALORIE_1 * self.get_mean_speed()
+                - self.COEFF_CALORIE_2)
                 * self.weight) / self.M_IN_KM * self.duration * self.MINUTES
 
 
@@ -104,7 +106,7 @@ class Swimming(Training):
     LEN_STEP = 1.38
     COEFF_CALORIE_5 = 1.1
     COEFF_CALORIE_6 = 2
-    
+
     def __init__(self,
                  action: int,
                  duration: float,
@@ -137,7 +139,6 @@ def read_package(workout_type: str, data: list) -> Training:
     if workout_type in workout_dictionary:
         return workout_dictionary[workout_type](*data)
     raise ValueError('Заданная тренировка недоступна')
-
 
 
 def main(training: Training) -> None:
